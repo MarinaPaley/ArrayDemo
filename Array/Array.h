@@ -12,6 +12,7 @@ namespace rut::uizi::array
 	private:
 		size_t size;
 		int* data;
+		void CheckIndex(const size_t i) const;
 	public:
 		explicit Array(const int size);
 		Array(const std::initializer_list<int> list);

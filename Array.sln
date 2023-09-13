@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj", "{06A2AD20-93F6-4A68-B5EB-794126076A02}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Array", "Array\Array.vcxproj", "{168B481E-F74B-4AE7-867F-8358AA161620}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TemplateArray", "TemplateArray\TemplateArray.vcxproj", "{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{168B481E-F74B-4AE7-867F-8358AA161620}.Release|x64.Build.0 = Release|x64
 		{168B481E-F74B-4AE7-867F-8358AA161620}.Release|x86.ActiveCfg = Release|Win32
 		{168B481E-F74B-4AE7-867F-8358AA161620}.Release|x86.Build.0 = Release|Win32
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Debug|x64.ActiveCfg = Debug|x64
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Debug|x64.Build.0 = Debug|x64
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Debug|x86.Build.0 = Debug|Win32
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Release|x64.ActiveCfg = Release|x64
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Release|x64.Build.0 = Release|x64
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Release|x86.ActiveCfg = Release|Win32
+		{9C6BC823-FAAF-494D-8469-6E976D8CDEFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
