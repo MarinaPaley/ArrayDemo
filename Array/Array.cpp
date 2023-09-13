@@ -12,7 +12,7 @@ namespace rut::uizi::array
 			throw std::logic_error("–азмер массива должен быть неотрицательным!");
 		}
 
-		this->size = static_cast<int>(size);
+		this->size = static_cast<size_t>(size);
 		this->data = new int[this->size];
 	}
 
