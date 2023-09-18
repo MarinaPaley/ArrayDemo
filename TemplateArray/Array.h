@@ -4,12 +4,27 @@
 
 namespace rut::cip::array
 {
+	/*
+	*@brief Класс массив.
+	*/
 	template<typename T>
 	class Array final
 	{
 	private:
+		/*
+		* @brief Размер массива.
+		*/
 		size_t size;
+
+		/*
+		* @brief Данные массива.
+		*/
 		T* data;
+
+		/*
+		* @brief Проверка существования индекса.
+		* @param i Индекс.
+		*/
 		void CheckIndex(const size_t i) const;
 	public:
 		explicit Array(const int size);
@@ -25,7 +40,8 @@ namespace rut::cip::array
 
 		size_t GetSize() const;
 
-		friend std::ostream& operator<<(std::ostream& os, const Array& array);
+		template<typename U>
+		friend std::ostream& operator<< <>(std::ostream& os, const Array<U>& array);
 	};
 
 	template<typename T>
@@ -42,7 +58,7 @@ namespace rut::cip::array
 
 	template<typename T>
 	Array<T>::Array(const std::initializer_list<T> list)
-		: size{ list.size()}, data{new int[this->size]}
+		: size{ list.size() }, data{ new int[this->size] }
 	{
 		std::copy(list.begin(), list.end(), this->data);
 	}
@@ -125,8 +141,8 @@ namespace rut::cip::array
 		return this->size;
 	}
 
-	template<typename T>
-	std::ostream& operator<<(std::ostream& os, const Array<T>& array)
+	template<typename U>
+	std::ostream& operator<<(std::ostream& os, const Array<U>& array)
 	{
 		std::stringstream buffer;
 		size_t i = 0;
@@ -138,4 +154,5 @@ namespace rut::cip::array
 
 		return os << buffer.str();
 	}
+
 }

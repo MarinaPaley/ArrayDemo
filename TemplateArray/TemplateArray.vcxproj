@@ -137,6 +137,9 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Array.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
