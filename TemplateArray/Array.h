@@ -1,9 +1,21 @@
 #pragma once
 #include <ostream>
 #include <sstream>
+#include <string>
 
 namespace rut::cip::array
 {
+	template<typename T> class Array;
+
+	//template<typename T>
+	//std::ostream& operator<< (std::ostream& os, const Array<T>& array);
+
+	//template<typename T>
+	//bool operator==(const Array<T>& lha, const Array<T>& rha);
+
+	template<typename T>
+	std::wstring ToString(const Array<T> array);
+
 	/*
 	*@brief Класс массив.
 	*/
@@ -40,8 +52,9 @@ namespace rut::cip::array
 
 		size_t GetSize() const;
 
-		template<typename U>
-		friend std::ostream& operator<< <>(std::ostream& os, const Array<U>& array);
+		//friend std::ostream& operator<< <>(std::ostream& os, const Array<T>& array);
+
+		//friend bool operator== <T>(const Array& lha, const Array& rha);
 	};
 
 	template<typename T>
@@ -58,14 +71,14 @@ namespace rut::cip::array
 
 	template<typename T>
 	Array<T>::Array(const std::initializer_list<T> list)
-		: size{ list.size() }, data{ new int[this->size] }
+		: size{ list.size() }, data{ new T[this->size] }
 	{
 		std::copy(list.begin(), list.end(), this->data);
 	}
 
 	template<typename T>
 	Array<T>::Array(const Array& other)
-		: size{ other.size }, data{ new int[this->size] }
+		: size{ other.size }, data{ new T[this->size] }
 	{
 		std::copy(other.data, other.data + size, this->data);
 	}
@@ -92,7 +105,7 @@ namespace rut::cip::array
 		{
 			delete[] this->data;
 			this->size = other.size;
-			this->data = new int[this->size];
+			this->data = new T[this->size];
 
 			std::copy(other.data, other.data + other.size, this->data);
 		}
@@ -140,9 +153,9 @@ namespace rut::cip::array
 	{
 		return this->size;
 	}
-
-	template<typename U>
-	std::ostream& operator<<(std::ostream& os, const Array<U>& array)
+/*
+	template<typename T>
+	std::ostream& operator<<<>(std::ostream& os, const Array<T>& array)
 	{
 		std::stringstream buffer;
 		size_t i = 0;
@@ -155,4 +168,39 @@ namespace rut::cip::array
 		return os << buffer.str();
 	}
 
+	/*
+	template<typename T>
+	bool operator== <T>(const Array<T>& lha, const Array<T>& rha)
+	{
+		if (lha.GetSize() != rha.GetSize())
+		{
+			return false;
+		}
+
+		for (size_t i = 0; i < lha.GetSize(); ++i)
+		{
+			if (lha[i] != rha[i])
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+*/
+	
+	template<typename T>
+	std::wstring ToString(const Array<T> array)
+	{
+		std::wstringstream buffer;
+		size_t i = 0;
+		for (; i < array.GetSize() - 1; ++i)
+		{
+			buffer << array[i] << L", ";
+		}
+		buffer << array[i] << L"\n";
+
+		return buffer.str();
+	}
+	
 }
