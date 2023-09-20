@@ -7,14 +7,20 @@ namespace rut::cip::array
 {
 	template<typename T> class Array;
 
-	//template<typename T>
-	//std::ostream& operator<< (std::ostream& os, const Array<T>& array);
-
-	//template<typename T>
-	//bool operator==(const Array<T>& lha, const Array<T>& rha);
+	template<typename T>
+	std::ostream& operator<< (std::ostream& os, const Array<T>& array);
 
 	template<typename T>
-	std::wstring ToString(const Array<T> array);
+	std::wostream& operator<< (std::wostream& os, const Array<T>& array);
+
+	template<typename T>
+	bool operator==(const Array<T>& lha, const Array<T>& rha);
+
+	template<typename T>
+	std::wstring ToString(const Array<T>& array);
+
+	template<typename T>
+	std::wstring ToString(Array<T>* array);
 
 	/*
 	*@brief Класс массив.
@@ -52,9 +58,10 @@ namespace rut::cip::array
 
 		size_t GetSize() const;
 
-		//friend std::ostream& operator<< <>(std::ostream& os, const Array<T>& array);
+		friend std::ostream& operator<< <>(std::ostream& os, const Array<T>& array);
+		friend std::wostream& operator<< <>(std::wostream& os, const Array<T>& array);
 
-		//friend bool operator== <T>(const Array& lha, const Array& rha);
+		friend bool operator== <T>(const Array& lha, const Array& rha);
 	};
 
 	template<typename T>
@@ -153,11 +160,11 @@ namespace rut::cip::array
 	{
 		return this->size;
 	}
-/*
+
 	template<typename T>
 	std::ostream& operator<<<>(std::ostream& os, const Array<T>& array)
 	{
-		std::stringstream buffer;
+		std::stringstream buffer{};
 		size_t i = 0;
 		for (; i < array.GetSize() - 1; ++i)
 		{
@@ -168,7 +175,21 @@ namespace rut::cip::array
 		return os << buffer.str();
 	}
 
-	/*
+	template<typename T>
+	std::wostream& operator<<<>(std::wostream& os, const Array<T>& array)
+	{
+		std::wstringstream buffer{};
+		size_t i = 0;
+		for (; i < array.GetSize() - 1; ++i)
+		{
+			buffer << array[i] << L", ";
+		}
+		buffer << array[i] << L"\n";
+
+		return os << buffer.str();
+	}
+
+	
 	template<typename T>
 	bool operator== <T>(const Array<T>& lha, const Array<T>& rha)
 	{
@@ -187,18 +208,33 @@ namespace rut::cip::array
 
 		return true;
 	}
-*/
+
 	
 	template<typename T>
-	std::wstring ToString(const Array<T> array)
+	std::wstring ToString(const Array<T>& array)
 	{
-		std::wstringstream buffer;
+		std::wstringstream buffer{};
 		size_t i = 0;
 		for (; i < array.GetSize() - 1; ++i)
 		{
 			buffer << array[i] << L", ";
 		}
 		buffer << array[i] << L"\n";
+
+		return buffer.str();
+
+	}
+
+	template<typename T>
+	std::wstring ToString(Array<T>* array)
+	{
+		std::wstringstream buffer{};
+		size_t i = 0;
+		for (; i < array->GetSize() - 1; ++i)
+		{
+			buffer << *array[i] << L", ";
+		}
+		buffer << *array[i] << L"\n";
 
 		return buffer.str();
 	}

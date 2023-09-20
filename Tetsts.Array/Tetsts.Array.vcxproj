@@ -172,6 +172,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Point\Point.vcxproj">
+      <Project>{e9842eb8-12e5-473c-bef6-0fa33d8222ca}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TemplateArray\TemplateArray.vcxproj">
       <Project>{9c6bc823-faaf-494d-8469-6e976d8cdefe}</Project>
     </ProjectReference>

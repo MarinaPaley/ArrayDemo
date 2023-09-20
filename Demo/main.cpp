@@ -10,7 +10,7 @@ int main()
 	std::cout << array;
 
 	rut::cip::array::Array<int> array1{ 1, 2, 3, 4 };
-	//std::cout << array1;
+	std::cout << array1;
 
 	try
 	{

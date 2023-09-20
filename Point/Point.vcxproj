@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9c6bc823-faaf-494d-8469-6e976d8cdefe}</ProjectGuid>
-    <RootNamespace>TemplateArray</RootNamespace>
+    <ProjectGuid>{e9842eb8-12e5-473c-bef6-0fa33d8222ca}</ProjectGuid>
+    <RootNamespace>Point</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -135,11 +135,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\STATICLIB1\ARRAY.H" />
-    <ClInclude Include="Array.h" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
+    <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
