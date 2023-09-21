@@ -113,5 +113,229 @@ namespace TetstsArray
 			//Act & Assert
 			Assert::IsTrue(a1 == a2);
 		}
+
+		TEST_METHOD(CopyCtorStringArray_ValidData_Success)
+		{
+			// Arrange
+			const std::string s1 = "1";
+			const std::string s2 = "2";
+			const std::string s3 = "3";
+			const Array<std::string> a1{ s1, s2, s3 };
+			// Act
+			const Array<std::string> a2(a1);
+			Array<std::string> a3(a1);
+			a3[0] = "0";
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		TEST_METHOD(CopyCtorIntArray_ValidData_Success)
+		{
+			// Arrange
+			const Array<int> a1{ 1, 2, 3, 4, 5 };
+			// Act
+			const Array<int> a2(a1);
+			Array<int> a3(a1);
+			a3[0] = 0;
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		TEST_METHOD(CopyCtorPointArray_ValidData_Success)
+		{
+			// Arrange
+			const Point::Point point1{};
+			const Point::Point point2{1, 2};
+			const Point::Point point3{5, 8};
+
+			const Array<Point::Point> a1{ point1, point2, point3 };
+
+			// Act
+			const Array<Point::Point> a2(a1);
+			Array<Point::Point> a3(a1);
+			const Point::Point point4{10, 23};
+			a3[0] = point4;
+
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		TEST_METHOD(CopyAssignStringArray_ValidData_Success)
+		{
+			// Arrange
+			const std::string s1 = "1";
+			const std::string s2 = "2";
+			const std::string s3 = "3";
+			Array<std::string> a1{ s1, s2, s3 };
+
+			Array<std::string> a2{};
+			Array<std::string> a3{};
+
+			// Act
+			a1 = a1;
+			a2 = a1;
+			a3 = a1;
+			a3[0] = "0";
+
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		TEST_METHOD(CopyAssignIntArray_ValidData_Success)
+		{
+			// Arrange
+			Array<int> a1{ 1, 2, 3, 4, 5 };
+			Array<int> a2{};
+			Array<int> a3{};
+
+			// Act
+			a1 = a1;
+			a2 = a1;
+			a3 = a1;
+			a3[0] = 0;
+
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		TEST_METHOD(CopyAssignPointArray_ValidData_Success)
+		{
+			// Arrange
+			const Point::Point point1{};
+			const Point::Point point2{1, 2};
+			const Point::Point point3{5, 8};
+
+			Array<Point::Point> a1{ point1, point2, point3 };
+			Array<Point::Point> a2{};
+			Array<Point::Point> a3{};
+
+			// Act
+			a1 = a1;
+			a2 = a1;
+			a3 = a1;
+			const Point::Point point4{10, 23};
+			a3[0] = point4;
+
+			// Assert
+			Assert::AreNotSame(a1, a2);
+			Assert::AreEqual(a1, a2);
+			Assert::AreNotEqual(a1, a3);
+		}
+
+		/*
+		*@brief Move ctors
+		*/
+		TEST_METHOD(MoveCtorStringArray_ValidData_Success)
+		{
+			// Arrange
+			const std::string s1 = "1";
+			const std::string s2 = "2";
+			const std::string s3 = "3";
+			Array<std::string> a1{ s1, s2, s3 };
+			size_t size = 3;
+
+			// Act
+			const Array<std::string> a2(std::move(a1));
+			
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
+
+		TEST_METHOD(MoveCtorIntArray_ValidData_Success)
+		{
+			// Arrange
+			Array<int> a1{ 1, 2, 3, 4, 5 };
+			size_t size = 5;
+
+			// Act
+			const Array<int> a2(std::move(a1));
+
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
+
+		TEST_METHOD(MoveCtorPointArray_ValidData_Success)
+		{
+			// Arrange
+			const Point::Point point1{};
+			const Point::Point point2{1, 2};
+			const Point::Point point3{5, 8};
+
+			Array<Point::Point> a1{ point1, point2, point3 };
+			size_t size = 3;
+
+			// Act
+			const Array<Point::Point> a2(std::move(a1));
+
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
+
+		TEST_METHOD(MoveAssignStringArray_ValidData_Success)
+		{
+			// Arrange
+			const std::string s1 = "1";
+			const std::string s2 = "2";
+			const std::string s3 = "3";
+			Array<std::string> a1{ s1, s2, s3 };
+			size_t size = 3;
+
+			Array<std::string> a2{};
+			Array<std::string> a3{};
+
+			// Act
+			a1 = std::move(a1);
+			a2 = std::move(a1);
+
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
+
+		TEST_METHOD(MoveAssignIntArray_ValidData_Success)
+		{
+			// Arrange
+			Array<int> a1{ 1, 2, 3, 4, 5 };
+			Array<int> a2{};
+			Array<int> a3{};
+			size_t size = 5;
+
+			// Act
+			a1 = std::move(a1);
+			a2 = std::move(a1);
+
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
+
+		TEST_METHOD(MoveAssignPointArray_ValidData_Success)
+		{
+			// Arrange
+			const Point::Point point1{};
+			const Point::Point point2{1, 2};
+			const Point::Point point3{5, 8};
+
+			Array<Point::Point> a1{ point1, point2, point3 };
+			size_t size = 3;
+
+			Array<Point::Point> a2{};
+			Array<Point::Point> a3{};
+
+			// Act
+			a1 = std::move(a1);
+			a2 = std::move(a1);
+
+			// Assert
+			Assert::AreEqual(size, a2.GetSize());
+		}
 	};
 }

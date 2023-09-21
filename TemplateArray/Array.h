@@ -88,15 +88,13 @@ namespace rut::cip::array
 	Array<T>::Array(const Array& other)
 		: size{ other.size }, data{ new T[this->size] }
 	{
-		std::copy(other.data, other.data + size, this->data);
+		*this = other;
 	}
 
 	template<typename T>
 	Array<T>::Array(Array&& other) noexcept
 		: size{ 0 }, data{ nullptr }
 	{
-		//std::swap(other.data, this->data);
-		//std::exchange(other.size, this->size);
 		*this = std::move(other);
 	}
 
@@ -127,7 +125,9 @@ namespace rut::cip::array
 		if (this != &other)
 		{
 			std::swap(other.data, this->data);
-			std::exchange(other.size, this->size);
+			// Почему-то не работает
+			//std::exchange(other.size, this->size);
+			std::swap(other.size, this->size);
 		}
 
 		return *this;
@@ -138,7 +138,7 @@ namespace rut::cip::array
 	{
 		if (i >= this->GetSize())
 		{
-			throw std::out_of_range("Значение индекса больше размера массива!");
+			throw std::out_of_range("Неправильное значение индекса!");
 		}
 	}
 
@@ -191,7 +191,7 @@ namespace rut::cip::array
 
 
 	template<typename T>
-	std::wstring rut::cip::array::ToString(const Array<T>& array)
+	std::wstring ToString(const Array<T>& array)
 	{
 		std::wstringstream buffer{};
 		buffer << array;
@@ -200,7 +200,7 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	bool rut::cip::array::operator== <>(const Array<T>& lha, const Array<T>& rha)
+	bool operator== <>(const Array<T>& lha, const Array<T>& rha)
 	{
 		if (lha.GetSize() != rha.GetSize())
 		{
@@ -219,7 +219,7 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	bool rut::cip::array::operator!= <>(const Array<T>& lha, const Array<T>& rha)
+	bool operator!= <>(const Array<T>& lha, const Array<T>& rha)
 	{
 		return !(lha == rha);
 	}
