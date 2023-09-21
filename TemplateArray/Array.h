@@ -22,12 +22,6 @@ namespace rut::cip::array
 	template<typename T>
 	std::wstring ToString(const Array<T>& array);
 
-	template<typename T>
-	std::wstring ToString(Array<T>* array);
-
-	template<typename T>
-	std::wstring ToString(const Array<T>* array);
-
 	/*
 	*@brief Класс массив.
 	*/
@@ -64,8 +58,8 @@ namespace rut::cip::array
 
 		size_t GetSize() const;
 
-		friend std::ostream& operator<< <>(std::ostream& os, const Array<T>& array);
-		friend std::wostream& operator<< <>(std::wostream& os, const Array<T>& array);
+		friend std::ostream& operator<< <T>(std::ostream& os, const Array<T>& array);
+		friend std::wostream& operator<< <T>(std::wostream& os, const Array<T>& array);
 
 		friend bool operator== <T>(const Array& lha, const Array& rha);
 		friend bool operator!= <T>(const Array& lha, const Array& rha);
@@ -185,55 +179,22 @@ namespace rut::cip::array
 	template<typename T>
 	std::wostream& operator<<<>(std::wostream& os, const Array<T>& array)
 	{
+		std::stringstream temp{};
+		temp << array;
+		std::string tempString = temp.str();
+
 		std::wstringstream buffer{};
-		size_t i = 0;
-		for (; i < array.GetSize() - 1; ++i)
-		{
-			buffer << array[i] << L", ";
-		}
-		buffer << array[i] << L"\n";
+		buffer << temp.rdbuf();
 
 		return os << buffer.str();
 	}
 
-	template<typename T>
-	std::wstring rut::cip::array::ToString(Array<T>* array)
-	{
-		std::wstringstream buffer{};
-		size_t i = 0;
-		for (; i < array->GetSize() - 1; ++i)
-		{
-			buffer << *array[i] << L", ";
-		}
-		buffer << *array[i] << L"\n";
-
-		return buffer.str();
-	}
-
-	template<typename T>
-	std::wstring rut::cip::array::ToString(const Array<T>* array)
-	{
-		std::wstringstream buffer{};
-		size_t i = 0;
-		for (; i < array.GetSize() - 1; ++i)
-		{
-			buffer << array[i] << L", ";
-		}
-		buffer << array[i] << L"\n";
-
-		return buffer.str();
-	}
 
 	template<typename T>
 	std::wstring rut::cip::array::ToString(const Array<T>& array)
 	{
 		std::wstringstream buffer{};
-		size_t i = 0;
-		for (; i < array.GetSize() - 1; ++i)
-		{
-			buffer << array[i] << L", ";
-		}
-		buffer << array[i] << L"\n";
+		buffer << array;
 
 		return buffer.str();
 	}

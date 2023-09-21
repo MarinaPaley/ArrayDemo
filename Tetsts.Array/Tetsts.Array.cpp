@@ -97,7 +97,7 @@ namespace TetstsArray
 			const Array<std::string> a2{ s1, s2, s3 };
 
 			//Act & Assert
-			//Assert::IsTrue(a1 == a2);
+			Assert::IsTrue(a1 == a2);
 		}
 
 		TEST_METHOD(OperatorEqualPoint_ValidData_Success)
