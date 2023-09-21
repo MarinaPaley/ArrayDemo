@@ -23,25 +23,25 @@ namespace rut::cip::array
 	std::wstring ToString(const Array<T>& array);
 
 	/*
-	*@brief Класс массив.
+	*@brief РљР»Р°СЃСЃ РјР°СЃСЃРёРІ.
 	*/
 	template<typename T>
 	class Array final
 	{
 	private:
 		/*
-		* @brief Размер массива.
+		* @brief Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°.
 		*/
 		size_t size;
 
 		/*
-		* @brief Данные массива.
+		* @brief Р”Р°РЅРЅС‹Рµ РјР°СЃСЃРёРІР°.
 		*/
 		T* data;
 
 		/*
-		* @brief Проверка существования индекса.
-		* @param i Индекс.
+		* @brief РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РёРЅРґРµРєСЃР°.
+		* @param i РРЅРґРµРєСЃ.
 		*/
 		void CheckIndex(const size_t i) const;
 	public:
@@ -70,7 +70,7 @@ namespace rut::cip::array
 	{
 		if (size <= 0)
 		{
-			throw std::logic_error("Размер массива должен быть неотрицательным!");
+			throw std::logic_error("Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР° РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј!");
 		}
 
 		this->size = static_cast<size_t>(size);
@@ -125,7 +125,7 @@ namespace rut::cip::array
 		if (this != &other)
 		{
 			std::swap(other.data, this->data);
-			// Почему-то не работает
+			// РџРѕС‡РµРјСѓ-С‚Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚
 			//std::exchange(other.size, this->size);
 			std::swap(other.size, this->size);
 		}
@@ -138,7 +138,7 @@ namespace rut::cip::array
 	{
 		if (i >= this->GetSize())
 		{
-			throw std::out_of_range("Неправильное значение индекса!");
+			throw std::out_of_range("РќРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РёРЅРґРµРєСЃР°!");
 		}
 	}
 

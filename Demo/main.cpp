@@ -19,7 +19,7 @@ int main()
 	}
 	catch (std::logic_error& e)
 	{
-		std::cerr << "Îøèáêà! " << e.what();
+		std::cerr << "ÐžÑˆÐ¸Ð±ÐºÐ°! " << e.what();
 	}
 	return 0;
 }

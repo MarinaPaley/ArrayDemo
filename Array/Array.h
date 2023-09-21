@@ -5,7 +5,7 @@
 namespace rut::uizi::array
 {
 	/*
-	* @brief Класс вектор...)
+	* @brief В Р»Р°СЃСЃ РІРµРєС‚РѕСЂ...)
 	*/
 	class Array final
 	{
