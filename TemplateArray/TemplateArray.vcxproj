@@ -135,7 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\STATICLIB1\ARRAY.H" />
     <ClInclude Include="Array.h" />
   </ItemGroup>
   <ItemGroup>
