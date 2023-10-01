@@ -7,62 +7,140 @@ namespace rut::cip::array
 {
 	template<typename T> class Array;
 
+	/**
+	 * @brief Опрератор сдвига.
+	 * @tparam T Тип данных массива.
+	 * @param os Поток вывода.
+	 * @param array Массив (целевой объект, направляемый в поток вывода).
+	 * @return Изменённый поток вывода.
+	*/
 	template<typename T>
 	std::ostream& operator<< (std::ostream& os, const Array<T>& array);
 
+	/**
+	 * @brief Опрератор сдвига в поток вывода "широких" символов.
+	 * @tparam T Тип данных массива.
+	 * @param os Поток вывода.
+	 * @param array Массив (целевой объект, направляемый в поток вывода).
+	 * @return Изменённый поток вывода.
+	*/
 	template<typename T>
 	std::wostream& operator<< (std::wostream& os, const Array<T>& array);
 
+	/**
+	 * @brief Оператор равенства двух массивов.
+	 * @tparam T Тип данных массива.
+	 * @param lha Первый массив.
+	 * @param rha Второй массив.
+	 * @return \c true в случае равенства массивов, иначе \c false.
+	*/
 	template<typename T>
 	bool operator==(const Array<T>& lha, const Array<T>& rha);
 
+	/**
+	 * @brief Оператор неравенства двух массивов.
+	 * @tparam T Тип данных массива.
+	 * @param lha Первый массив.
+	 * @param rha Второй массив.
+	 * @return \c false в случае равенства массивов, иначе \c true.
+	*/
 	template<typename T>
 	bool operator!=(const Array<T>& lha, const Array<T>& rha);
 
+	/**
+	 * @brief Функция вывода масива в строку "широких" символов.
+	 * @tparam T Тип данных массива.
+	 * @param array Массив (целевой объект).
+	 * @return Строковое представление данных массива.
+	*/
 	template<typename T>
 	std::wstring ToString(const Array<T>& array);
 
-	/*
-	*@brief Класс массив.
+	/**
+	* @brief Класс массив.
 	*/
 	template<typename T>
 	class Array final
 	{
 	private:
-		/*
+		/**
 		* @brief Размер массива.
 		*/
 		size_t size;
 
-		/*
+		/**
 		* @brief Данные массива.
 		*/
 		T* data;
 
-		/*
+		/**
 		* @brief Проверка существования индекса.
 		* @param i Индекс.
 		*/
 		void CheckIndex(const size_t i) const;
 	public:
+		/**
+		 * @brief Конструктор.
+		 * @param size Размер массива.
+		*/
 		explicit Array(const int size);
+
+		/**
+		 * @brief Конструктор.
+		 * @param list Список инициализируемых объектов.
+		*/
 		Array(const std::initializer_list<T> list);
+
+		/**
+		 * @brief Конструктор копирования.
+		 * @param other Другой массив, копируемый объект.
+		*/
 		Array(const Array& other);
+
+		/**
+		 * @brief Конструктор перемещения.
+		 * @param other Другой массив (перемещаемый объект).
+		*/
 		Array(Array&& other) noexcept;
+
+		/**
+		 * @brief Деструктор.
+		*/
 		~Array();
+
+		/**
+		 * @brief Оператор копирования.
+		 * @param other Другой массив, подлежащий копированию.
+		 * @return Скопированный объект.
+		*/
 		Array& operator=(const Array& other);
+
+		/**
+		 * @brief Оператор перемещения.
+		 * @param other Другой массив, подлежащий перемещению.
+		 * @return Перемещенны объект.
+		*/
 		Array& operator=(Array&& other) noexcept;
 
+		/**
+		 * @brief Индексатор. Предоставляет доступ только на чтение.
+		 * @param i Индекс.
+		 * @return Значение разыменованного объекта по индексу.
+		*/
 		const T& operator[](size_t i) const;
+
+		/**
+		 * @brief Индексатор. Предоставляет доступ на изменение.
+		 * @param i Индекс.
+		 * @return Значение разыменованного объекта по индексу.
+		*/
 		T& operator[](size_t i);
 
+		/**
+		 * @brief Метод получения размера массива.
+		 * @return Размер массива.
+		*/
 		size_t GetSize() const;
-
-		friend std::ostream& operator<< <T>(std::ostream& os, const Array<T>& array);
-		friend std::wostream& operator<< <T>(std::wostream& os, const Array<T>& array);
-
-		friend bool operator== <T>(const Array& lha, const Array& rha);
-		friend bool operator!= <T>(const Array& lha, const Array& rha);
 	};
 
 	template<typename T>
@@ -163,7 +241,7 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	std::ostream& operator<<<>(std::ostream& os, const Array<T>& array)
+	std::ostream& operator<<(std::ostream& os, const Array<T>& array)
 	{
 		std::stringstream buffer{};
 		size_t i = 0;
@@ -177,7 +255,7 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	std::wostream& operator<<<>(std::wostream& os, const Array<T>& array)
+	std::wostream& operator<<(std::wostream& os, const Array<T>& array)
 	{
 		std::stringstream temp{};
 		temp << array;
@@ -189,7 +267,6 @@ namespace rut::cip::array
 		return os << buffer.str();
 	}
 
-
 	template<typename T>
 	std::wstring ToString(const Array<T>& array)
 	{
@@ -200,7 +277,7 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	bool operator== <>(const Array<T>& lha, const Array<T>& rha)
+	bool operator== (const Array<T>& lha, const Array<T>& rha)
 	{
 		if (lha.GetSize() != rha.GetSize())
 		{
@@ -219,9 +296,8 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	bool operator!= <>(const Array<T>& lha, const Array<T>& rha)
+	bool operator!= (const Array<T>& lha, const Array<T>& rha)
 	{
 		return !(lha == rha);
 	}
-
 }
