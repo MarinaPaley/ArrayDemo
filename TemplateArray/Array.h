@@ -259,10 +259,15 @@ namespace rut::cip::array
 	{
 		std::stringstream temp{};
 		temp << array;
+
 		std::string tempString = temp.str();
 
+		std::wstring ws{tempString.cbegin(), tempString.cend()};
+
 		std::wstringstream buffer{};
-		buffer << temp.rdbuf();
+		// @NOTE: Логическая ошибка. Вывоится НЕ содержимое, а адрес буфера.
+		//buffer << temp.rdbuf();
+		buffer << ws;
 
 		return os << buffer.str();
 	}
