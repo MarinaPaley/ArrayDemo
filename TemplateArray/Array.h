@@ -78,6 +78,12 @@ namespace rut::cip::array
 		* @param i Индекс.
 		*/
 		void CheckIndex(const size_t i) const;
+
+		/**
+		 * @brief Обмен содержимым.
+		 * @param other Обмениваемый массив.
+		*/
+		void Swap(Array<T> other) noexcept;
 	public:
 		/**
 		 * @brief Конструктор.
@@ -185,6 +191,7 @@ namespace rut::cip::array
 	template<typename T>
 	Array<T>& Array<T>::operator=(const Array<T>& other)
 	{
+		/*
 		if (this != &other)
 		{
 			delete[] this->data;
@@ -193,6 +200,9 @@ namespace rut::cip::array
 
 			std::copy(other.data, other.data + other.size, this->data);
 		}
+		*/
+		Array<T> temp(other);
+		this->Swap(temp);
 
 		return *this;
 	}
@@ -202,10 +212,7 @@ namespace rut::cip::array
 	{
 		if (this != &other)
 		{
-			std::swap(other.data, this->data);
-			// Почему-то не работает
-			//std::exchange(other.size, this->size);
-			std::swap(other.size, this->size);
+			this->Swap(other);
 		}
 
 		return *this;
@@ -218,6 +225,13 @@ namespace rut::cip::array
 		{
 			throw std::out_of_range("Неправильное значение индекса!");
 		}
+	}
+
+	template<typename T>
+	inline void Array<T>::Swap(Array<T> other) noexcept
+	{
+		std::swap(other.data, this->data);
+		std::swap(other.size, this->size);
 	}
 
 	template<typename T>
