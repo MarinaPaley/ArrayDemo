@@ -172,7 +172,7 @@ namespace rut::cip::array
 	Array<T>::Array(const Array& other)
 		: size{ other.size }, data{ new T[this->size] }
 	{
-		*this = other;
+		std::copy(this->data, this->data + this->size, other.data);
 	}
 
 	template<typename T>
