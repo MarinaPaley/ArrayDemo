@@ -1,4 +1,4 @@
-#include <stdexcept>
+п»ї#include <stdexcept>
 #include <algorithm>
 #include <sstream>
 #include "Array.h"
@@ -9,7 +9,7 @@ namespace rut::uizi::array
 	{
 		if (i >= this->GetSize())
 		{
-			throw std::out_of_range("Значение индекса больше размера массива!");
+			throw std::out_of_range("Р—РЅР°С‡РµРЅРёРµ РёРЅРґРµРєСЃР° Р±РѕР»СЊС€Рµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°!");
 		}
 	}
 
@@ -17,7 +17,7 @@ namespace rut::uizi::array
 	{
 		if (size <= 0)
 		{
-			throw std::logic_error("Размер массива должен быть неотрицательным!");
+			throw std::logic_error("Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР° РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј!");
 		}
 
 		this->size = static_cast<size_t>(size);
@@ -53,11 +53,17 @@ namespace rut::uizi::array
 	{
 		if (this != &other)
 		{
+			/*
 			delete[] this->data;
 			this->size = other.size;
 			this->data = new int[this->size];
 
 			std::copy(other.data, other.data + other.size, this->data);
+			*/
+			Array temp(other);
+			std::swap(this->data, temp.data);
+			std::swap(this->size, temp.size);
+
 		}
 
 		return *this;

@@ -337,5 +337,40 @@ namespace TetstsArray
 			// Assert
 			Assert::AreEqual(size, a2.GetSize());
 		}
+		TEST_METHOD(PushIntArray_ValidData_Success)
+		{
+			// Arrange
+			Array<int> actual{ 1, 2, 3, 4, 5 };
+			size_t size = 5;
+			size_t expectedSize = 6;
+			Array<int> expected{ 1, 2, 3, 4, 5, 6 };
+
+			// Act
+			actual.Push(6);
+
+			// Assert
+			Assert::AreEqual(expectedSize, actual.GetSize());
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(PushStringArray_ValidData_Success)
+		{
+			// Arrange
+			const std::string s1 = "1";
+			const std::string s2 = "2";
+			const std::string s3 = "3";
+			Array<std::string> actual{ s1, s2, s3 };
+			size_t size = 3;
+			size_t expectedSize = 4;
+			const std::string s4 = "4";
+			Array<std::string> expected{ s1, s2, s3, s4 };
+
+			// Act
+			actual.Push(s4);
+
+			// Assert
+			Assert::AreEqual(expectedSize, actual.GetSize());
+			Assert::AreEqual(expected, actual);
+		}
 	};
 }

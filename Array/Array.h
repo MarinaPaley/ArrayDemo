@@ -4,8 +4,8 @@
 
 namespace rut::uizi::array
 {
-	/*
-	* @brief  ласс вектор...)
+	/**
+	* @brief  Класс вектор...
 	*/
 	class Array final
 	{
