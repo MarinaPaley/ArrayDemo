@@ -1,22 +1,25 @@
 #include <iostream>
 #include "..\Array\Array.h"
+#include "..\TemplateArray\Array.h"
 
-
-using namespace rut::uizi::array;
 
 int main()
 {
 	setlocale(LC_ALL, "RU");
-	Array array{ 1, 2, 3, 4 };
+	rut::uizi::array::Array array{ 1, 2, 3, 4 };
 	std::cout << array;
+
+	rut::cip::array::Array<int> array1{ 1, 2, 3, 4 };
+	std::cout << array1;
 
 	try
 	{
-		Array ayy(-1);
+		rut::uizi::array::Array ayy(-1);
+		rut::cip::array::Array<int> array3(-1);
 	}
 	catch (std::logic_error& e)
 	{
-		std::cerr << "Îøèáêà! " << e.what();
+		std::cerr << "ÐžÑˆÐ¸Ð±ÐºÐ°! " << e.what();
 	}
 	return 0;
 }

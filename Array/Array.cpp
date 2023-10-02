@@ -5,6 +5,14 @@
 
 namespace rut::uizi::array
 {
+	void Array::CheckIndex(const size_t i) const
+	{
+		if (i >= this->GetSize())
+		{
+			throw std::out_of_range("Значение индекса больше размера массива!");
+		}
+	}
+
 	Array::Array(const int size)
 	{
 		if (size <= 0)
@@ -17,7 +25,7 @@ namespace rut::uizi::array
 	}
 
 	Array::Array(const std::initializer_list<int> list)
-		: Array(list.size())
+		: size{ list.size()}, data{new int[this->size]}
 	{
 		std::copy(list.begin(), list.end(), this->data);
 	}
@@ -68,11 +76,13 @@ namespace rut::uizi::array
 
 	const int& Array::operator[](size_t i) const
 	{
+		this->CheckIndex(i);
 		return this->data[i];
 	}
 
 	int& Array::operator[](size_t i)
 	{
+		this->CheckIndex(i);
 		return this->data[i];
 	}
 
