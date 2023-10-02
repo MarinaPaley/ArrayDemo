@@ -63,6 +63,12 @@ namespace rut::cip::array
 	class Array final
 	{
 	private:
+		const size_t expandFactor = 2;
+
+		/**
+		*/
+		size_t capacity;
+
 		/**
 		* @brief Размер массива.
 		*/
@@ -83,8 +89,20 @@ namespace rut::cip::array
 		 * @brief Обмен содержимым.
 		 * @param other Обмениваемый массив.
 		*/
-		void Swap(Array<T> other) noexcept;
+		void Swap(Array<T>& other) noexcept;
+
+		/**
+		* @brief Метод, определяющий, что массив при текущей \c capacity заполнен.
+		* @return \с true, если заполнен массив, иначе \c false/
+		*/
+		bool IsFull() const noexcept;
+
+		void Expand();
 	public:
+		/**
+		*/
+		Array();
+
 		/**
 		 * @brief Конструктор.
 		 * @param size Размер массива.
@@ -147,7 +165,17 @@ namespace rut::cip::array
 		 * @return Размер массива.
 		*/
 		size_t GetSize() const;
+
+		Array& Push(const T& value);
+
+		bool IsEmpty() const noexcept;
 	};
+
+	template<typename T>
+	inline Array<T>::Array()
+		: capacity{0}, size{0}, data{nullptr}
+	{
+	}
 
 	template<typename T>
 	Array<T>::Array(const int size)
@@ -158,26 +186,31 @@ namespace rut::cip::array
 		}
 
 		this->size = static_cast<size_t>(size);
-		this->data = new T[this->size];
+		if (this->IsFull())
+		{
+			this->capacity = this->size * expandFactor;
+		}
+
+		this->data = new T[this->capacity];
 	}
 
 	template<typename T>
 	Array<T>::Array(const std::initializer_list<T> list)
-		: size{ list.size() }, data{ new T[this->size] }
+		: capacity { list.size() }, size{ list.size() }, data{ new T[this->capacity] }
 	{
 		std::copy(list.begin(), list.end(), this->data);
 	}
 
 	template<typename T>
 	Array<T>::Array(const Array& other)
-		: size{ other.size }, data{ new T[this->size] }
+		: capacity{ other.size }, size{ other.size }, data{ new T[this->capacity] }
 	{
 		std::copy(this->data, this->data + this->size, other.data);
 	}
 
 	template<typename T>
 	Array<T>::Array(Array&& other) noexcept
-		: size{ 0 }, data{ nullptr }
+		: Array()
 	{
 		*this = std::move(other);
 	}
@@ -192,12 +225,15 @@ namespace rut::cip::array
 	Array<T>& Array<T>::operator=(const Array<T>& other)
 	{
 		if (this != &other)
-		{/*
+		{
+			/*
 			delete[] this->data;
 			this->size = other.size;
 			this->data = new T[this->size];
 
-			std::copy(other.data, other.data + other.size, this->data);*/
+			std::copy(other.data, other.data + other.size, this->data);
+			*/
+
 			Array<T> temp(other);
 			this->Swap(temp);
 		}
@@ -226,10 +262,29 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
-	inline void Array<T>::Swap(Array<T> other) noexcept
+	inline void Array<T>::Swap(Array<T>& other) noexcept
 	{
+		std::swap(other.capacity, this->capacity);
 		std::swap(other.data, this->data);
 		std::swap(other.size, this->size);
+	}
+
+	template<typename T>
+	inline bool Array<T>::IsFull() const noexcept
+	{
+		return this->capacity <= this->size;
+	}
+
+	template<typename T>
+	inline void Array<T>::Expand()
+	{
+		Array temp(this->size);
+		for (size_t i = 0; i < this->size; ++i)
+		{
+			temp.data[i] = this->data[i];
+		}
+		
+		this->Swap(temp);
 	}
 
 	template<typename T>
@@ -250,6 +305,24 @@ namespace rut::cip::array
 	size_t Array<T>::GetSize() const
 	{
 		return this->size;
+	}
+
+	template<typename T>
+	inline Array<T>& Array<T>::Push(const T& value)
+	{
+		if (this->IsFull())
+		{
+			this->Expand();
+		}
+
+		this->data[this->size++] = value;
+		return *this;
+	}
+
+	template<typename T>
+	inline bool Array<T>::IsEmpty() const noexcept
+	{
+		return this->size == 0;
 	}
 
 	template<typename T>
