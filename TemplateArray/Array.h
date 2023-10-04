@@ -191,19 +191,17 @@ namespace rut::cip::array
 	template<typename T>
 	Array<T>& Array<T>::operator=(const Array<T>& other)
 	{
-		/*
 		if (this != &other)
-		{
+		{/*
 			delete[] this->data;
 			this->size = other.size;
 			this->data = new T[this->size];
 
-			std::copy(other.data, other.data + other.size, this->data);
+			std::copy(other.data, other.data + other.size, this->data);*/
+			Array<T> temp(other);
+			this->Swap(temp);
 		}
-		*/
-		Array<T> temp(other);
-		this->Swap(temp);
-
+				
 		return *this;
 	}
 
@@ -273,7 +271,7 @@ namespace rut::cip::array
 	{
 		std::stringstream temp{};
 		temp << array;
-
+		
 		std::string tempString = temp.str();
 
 		std::wstring ws{tempString.cbegin(), tempString.cend()};
