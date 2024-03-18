@@ -1,13 +1,18 @@
-#include <iostream>
+﻿#include <iostream>
 #include "..\Array\Array.h"
 #include "..\TemplateArray\Array.h"
 
+using namespace rut::uizi::array;
 
 int main()
 {
 	setlocale(LC_ALL, "RU");
 	rut::uizi::array::Array array{ 1, 2, 3, 4 };
 	std::cout << array;
+
+	Array array3{};
+	array3 = array;
+	std::cout << array3;
 
 	rut::cip::array::Array<int> array1{ 1, 2, 3, 4 };
 	std::cout << array1;
@@ -19,7 +24,7 @@ int main()
 	}
 	catch (std::logic_error& e)
 	{
-		std::cerr << "Ошибка! " << e.what();
+		std::cerr << "Ошибка " << e.what();
 	}
 	return 0;
 }
