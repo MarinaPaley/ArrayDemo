@@ -15,7 +15,7 @@ namespace rut::uizi::array
 		void CheckIndex(const size_t i) const;
 	public:
 		explicit Array(const int size);
-		Array(const std::initializer_list<int> list);
+		Array(std::initializer_list<int> list);
 		Array(const Array& other);
 		Array(Array&& other) noexcept;
 		~Array();
