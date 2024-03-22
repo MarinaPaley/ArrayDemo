@@ -99,7 +99,7 @@ namespace rut::uizi::array
 
 	std::ostream& operator<<(std::ostream& out, const Array& array)
 	{
-		std::stringstream buffer;
+		std::stringstream buffer{};
 		size_t i = 0;
 		for (; i < array.GetSize() - 1; ++i)
 		{
