@@ -24,7 +24,7 @@ namespace rut::uizi::array
 		this->data = new int[this->size];
 	}
 
-	Array::Array(const std::initializer_list<int> list)
+	Array::Array( std::initializer_list<int> list)
 		: size{ list.size()}, data{new int[this->size]}
 	{
 		std::copy(list.begin(), list.end(), this->data);
