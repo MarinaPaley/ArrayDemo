@@ -166,6 +166,11 @@ namespace rut::cip::array
 		*/
 		size_t GetSize() const;
 
+		/**
+		* @brief Добавление элемента.
+		* @param value параметр.
+		* @return Массив.
+		*/
 		Array& Push(const T& value);
 
 		bool IsEmpty() const noexcept;
