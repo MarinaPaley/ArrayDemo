@@ -278,12 +278,7 @@ namespace rut::cip::array
 	template<typename T>
 	inline void Array<T>::Expand()
 	{
-		Array temp(this->size);
-		for (size_t i = 0; i < this->size; ++i)
-		{
-			temp.data[i] = this->data[i];
-		}
-		
+		Array temp(this);	
 		this->Swap(temp);
 	}
 
