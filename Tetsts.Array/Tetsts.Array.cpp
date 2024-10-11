@@ -65,6 +65,21 @@ namespace TetstsArray
 			Assert::AreEqual(a1, a2);
 		}
 
+		TEST_METHOD(IntPush_NeedExpand_Success)
+		{
+			// Arrange
+			Array<int> a{ 1 };
+			const size_t expected = 3;
+			
+			// Act
+			a.Push(2);
+			a.Push(3);
+			const size_t actual = a.GetSize();
+
+			// Assert
+			Assert::AreEqual(expected, actual);
+		}
+
 		TEST_METHOD(StringArraysAreEqual_ValidData_Success)
 		{
 			// Arrange
