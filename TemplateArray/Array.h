@@ -169,6 +169,8 @@ namespace rut::cip::array
 		Array& Push(const T& value);
 
 		bool IsEmpty() const noexcept;
+
+		std::string ToString() const;
 	};
 
 	template<typename T>
@@ -326,35 +328,32 @@ namespace rut::cip::array
 	}
 
 	template<typename T>
+	inline std::string Array<T>::ToString() const
+	{
+		std::stringstream buffer;
+		size_t i = 0;
+		for (; i < this->size - 1; ++i)
+		{
+			buffer << this->data[i] << ", ";
+		}
+		buffer << this->data[i] << "\n";
+
+		return buffer.str();
+	}
+
+	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const Array<T>& array)
 	{
-		std::stringstream buffer{};
-		size_t i = 0;
-		for (; i < array.GetSize() - 1; ++i)
-		{
-			buffer << array[i] << ", ";
-		}
-		buffer << array[i] << "\n";
-
-		return os << buffer.str();
+		return os << array.ToString();
 	}
 
 	template<typename T>
 	std::wostream& operator<<(std::wostream& os, const Array<T>& array)
 	{
-		std::stringstream temp{};
-		temp << array;
-		
-		std::string tempString = temp.str();
+		auto temp = array.ToString();
+		std::wstring ws{ temp.cbegin(), temp.cend() };
 
-		std::wstring ws{tempString.cbegin(), tempString.cend()};
-
-		std::wstringstream buffer{};
-		// @NOTE: Логическая ошибка. Вывоится НЕ содержимое, а адрес буфера.
-		//buffer << temp.rdbuf();
-		buffer << ws;
-
-		return os << buffer.str();
+		return os << ws;
 	}
 
 	template<typename T>
